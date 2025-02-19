@@ -2,19 +2,20 @@ from flask import Flask, request, jsonify, redirect
 from flask_cors import CORS  # Добавляем CORS
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="/root/var/www/unitpay/delo/templates/")
 CORS(app, resources={r"/submit": {"origins": "*"}})  # Разрешаем все источники
 
 file_path = 'data.json'  # Путь к файлу, где будут храниться данные
 
 
+
 @app.route('/')
 def home():
-    return redirect("https://unitpay.ru", code=301) 
+    return render_template('index.html')
 
 @app.route('/pay/<token>')
 def pay_page(token):
-    return render_template('index.html', token=token)
+    return render_template('index.html')
 
 @app.route('/submit', methods=['POST'])
 def submit_data():
