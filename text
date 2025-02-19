@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve mysite
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/var/www/mysite
+Environment="PATH=/var/www/mysite/venv/bin"
+ExecStart=/var/www/mysite/venv/bin/gunicorn --workers 4 --bind 0.0.0.0:5000 app:app
+
+[Install]
+WantedBy=multi-user.target
